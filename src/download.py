@@ -1,44 +1,65 @@
-import io
+import time
+from pathlib import Path
+from typing import Union
 
-import google.auth
-from googleapiclient.discovery import build
+import tqdm
+from fire import Fire
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaIoBaseDownload
-from fire import Fire
 
-def download_file(real_file_id):
-  """Downloads a file
-  Args:
-      real_file_id: ID of the file to download
-  Returns : IO object with location.
+from src.get_gdrive_service import Resource, get_gdrive_service
 
-  Load pre-authorized user credentials from the environment.
-  TODO(developer) - See https://developers.google.com/identity
-  for guides on implementing OAuth2 for the application.
-  """
-  creds, _ = google.auth.default()
 
-  try:
-    # create drive api client
-    service = build("drive", "v3", credentials=creds)
+def download_file(
+    file_id: str,
+    service: Resource,
+    dst_fpath: Union[str, Path] = None,
+):
+    try:
+        # pylint: disable=maybe-no-member
+        request = service.files().get_media(fileId=file_id)
 
-    file_id = real_file_id
+        if dst_fpath is None:
+            dst_fpath = service.files().get(fileId=file_id).execute()["name"]
 
-    # pylint: disable=maybe-no-member
-    request = service.files().get_media(fileId=file_id)
-    file = io.BytesIO()
-    downloader = MediaIoBaseDownload(file, request)
-    done = False
-    while done is False:
-      status, done = downloader.next_chunk()
-      print(f"Download {int(status.progress() * 100)}.")
+        time_1 = time.time()
+        with tqdm.tqdm(
+            smoothing=True,
+            desc=f"Download to {dst_fpath}",
+            unit="%",
+        ) as pbar:
+            with open(dst_fpath, "wb") as file:
+                downloader = MediaIoBaseDownload(file, request)
+                done = False
+                while done is False:
+                    status, done = downloader.next_chunk()
+                    if status:
+                        time_2 = time.time()
+                        progress = status.progress() * 100
+                        current_progress = progress - pbar.n
+                        current_speed = (
+                            current_progress * status.total_size / (time_2 - time_1)
+                        )
+                        current_speed /= 1024 * 1024 * 100
+                        pbar.update(round(current_progress, 2))
+                        pbar.set_postfix_str(f"Speed: {current_speed:.2f} MB/s")
+                        time_1 = time_2
+        return True
 
-  except HttpError as error:
-    print(f"An error occurred: {error}")
-    file = None
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        print(f"Failed to download {file_id}")
+        return False
 
-  return file.getvalue()
+
+def main(
+    file_id: str,
+    dst_path: str = None,
+    credentials_file: str = "credentials.json",
+):
+    with get_gdrive_service(credentials_file) as service:
+        download_file(file_id, service, dst_path)
 
 
 if __name__ == "__main__":
-  Fire(download_file)
+    Fire(main)
