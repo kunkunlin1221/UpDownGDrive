@@ -1,4 +1,4 @@
-# Google drive api
+# Gdrive upload and download tool
 
 ## Installation
 
@@ -20,37 +20,50 @@ pip install -r requirements.txt
 ### Upload file
 
 ```bash
+file_path="path/to/file"
+folder_id="folder_id"
+credentials_file="path/to/credentials.json"
 ipython -- src/upload.py
-	--file_path <file_path>					# file path
-	--folder_id <folder_id> 				# folder id
-	--credentials_file <credentials_file>	# credentials file, default="credentials.json"
+	--file_path $file_path
+	--folder_id $folder_id
+	--credentials_file $credentials_file
 ```
 
 ### Upload folder
 
 ```bash
+folder="path/to/folder"
+mother_folder_id="mother_folder_id"
 # if you want to upload inside a existing folder, you need to give mother folder id
+credentials_file="path/to/credentials.json"
 ipython -- src/upload_folder.py
-	--folder <folder_path>					# folder path
-	--mother_folder_id <mother_folder_id>	# mother folder id
-	--credentials_file <credentials_file>	# credentials file, default="credentials.json"
+	--folder $folder
+	--mother_folder_id $mother_folder_id
+	--credentials_file $credentials_file
 ```
 
 ### Download file
 
 ```bash
+file_id="file_id"
+dst_path="path/to/save"
+credentials_file="path/to/credentials.json"
 ipython -- src/download.py
-	--file_id <file_id> 			# file id
-	--dst_path <file_path>			# destination path
-	--credentials_file <credentials_file>	# credentials file, default="credentials.json"
+	--file_id $file_id
+	--dst_path $dst_path
+	--credentials_file $credentials_file
 ```
 
 ### Download folder
 
 ```bash
+folder_id="folder_id"
+dst_folder="path/to/save"
+credentials_file="path/to/credentials.json"
+scan_size=1000
 ipython -- src/download_folder.py
-	--folder_id <folder_id>					# folder id
-	--dst_folder <folder_path> 				# destination folder
-	--credentials_file <credentials_file>	# credentials file, default="credentials.json"
-	--scan_size <scan_size> 				# number of files to scan
+	--folder_id $folder_id
+	--dst_folder $dst_folder
+	--credentials_file $credentials_file
+	--scan_size $scan_size
 ```
