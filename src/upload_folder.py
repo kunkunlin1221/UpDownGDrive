@@ -18,7 +18,7 @@ def create_folder(service: Resource, folder_name: str, mother_folder_id: str = N
             file_metadata["parents"] = [mother_folder_id]
 
         # pylint: disable=maybe-no-member
-        file = service.files().create(body=file_metadata, fields="id").execute()
+        file = service.files().create(body=file_metadata, fields="id", supportsAllDrives=True).execute()
         return file.get("id")
 
     except HttpError as error:
