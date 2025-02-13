@@ -23,9 +23,9 @@ pip install -r requirements.txt
 file_path="path/to/file"
 folder_id="folder_id"
 credentials_file="path/to/credentials.json"
-ipython -- src/upload.py
-	--file_path $file_path
-	--folder_id $folder_id
+ipython -- src/upload.py \
+	--file_path $file_path \
+	--folder_id $folder_id \
 	--credentials_file $credentials_file
 ```
 
@@ -36,9 +36,9 @@ folder="path/to/folder"
 mother_folder_id="mother_folder_id"
 # if you want to upload inside a existing folder, you need to give mother folder id
 credentials_file="path/to/credentials.json"
-ipython -- src/upload_folder.py
-	--folder $folder
-	--mother_folder_id $mother_folder_id
+ipython -- src/upload_folder.py \
+	--folder $folder \
+	--mother_folder_id $mother_folder_id \
 	--credentials_file $credentials_file
 ```
 
@@ -48,9 +48,9 @@ ipython -- src/upload_folder.py
 file_id="file_id"
 dst_path="path/to/save"
 credentials_file="path/to/credentials.json"
-ipython -- src/download.py
-	--file_id $file_id
-	--dst_path $dst_path
+ipython -- src/download.py \
+	--file_id $file_id \
+	--dst_path $dst_path \
 	--credentials_file $credentials_file
 ```
 
@@ -61,9 +61,9 @@ folder_id="folder_id"
 dst_folder="path/to/save"
 credentials_file="path/to/credentials.json"
 scan_size=1000
-ipython -- src/download_folder.py
-	--folder_id $folder_id
-	--dst_folder $dst_folder
-	--credentials_file $credentials_file
+ipython -- src/download_folder.py \
+	--folder_id $folder_id \
+	--dst_folder $dst_folder \
+	--credentials_file $credentials_file \
 	--scan_size $scan_size
 ```
