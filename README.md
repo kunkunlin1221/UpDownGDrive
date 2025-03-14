@@ -18,7 +18,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Upload file
+### Upload a file
 
 ```bash
 file_path="path/to/file"
@@ -30,7 +30,7 @@ ipython -- src/upload.py \
 	--credentials_file $credentials_file
 ```
 
-### Upload folder
+### Upload a folder
 
 ```bash
 folder="path/to/folder"
@@ -43,7 +43,7 @@ ipython -- src/upload_folder.py \
 	--credentials_file $credentials_file
 ```
 
-### Download file
+### Download a file
 
 ```bash
 file_id="file_id"
@@ -55,7 +55,7 @@ ipython -- src/download.py \
 	--credentials_file $credentials_file
 ```
 
-### Download folder
+### Download a folder
 
 ```bash
 folder_id="folder_id"
