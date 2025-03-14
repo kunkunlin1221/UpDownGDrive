@@ -1,4 +1,4 @@
-# Tool for uploading and downloading files to and from Google Drive
+# UpDownGDrive
 This repository provides a tool for uploading and downloading files to and from Google Drive. It uses personal credentials to access both individual and shared drives, allowing seamless transfer of folders and files.
 
 ## Installation
