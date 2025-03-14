@@ -1,4 +1,5 @@
-# Gdrive upload and download tool
+# Tool for uploading and downloading files to and from Google Drive
+This repository provides a tool for uploading and downloading files to and from Google Drive. It uses personal credentials to access both individual and shared drives, allowing seamless transfer of folders and files.
 
 ## Installation
 
@@ -6,7 +7,7 @@
 pip install -r requirements.txt
 ```
 
-## Prepare credentials
+## **Prepare credentials**
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project
