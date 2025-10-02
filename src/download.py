@@ -20,7 +20,11 @@ def download_file(
         request = service.files().get_media(fileId=file_id)
 
         if dst_fpath is None:
-            dst_fpath = service.files().get(fileId=file_id).execute()["name"]
+            dst_fpath = (
+                service.files()
+                .get(fileId=file_id, supportsAllDrives=True)
+                .execute()["name"]
+            )
 
         time_1 = time.time()
         with tqdm.tqdm(
