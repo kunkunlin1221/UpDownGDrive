@@ -1,4 +1,5 @@
 # UpDownGDrive
+
 This repository provides a tool for uploading and downloading files to and from Google Drive. It uses personal credentials to access both individual and shared drives, allowing seamless transfer of folders and files.
 
 ## Installation
@@ -25,9 +26,9 @@ file_path="path/to/file"
 folder_id="folder_id"
 credentials_file="path/to/credentials.json"
 ipython -- src/upload.py \
-	--file_path $file_path \
-	--folder_id $folder_id \
-	--credentials_file $credentials_file
+    --file_path $file_path \
+    --folder_id $folder_id \
+    --credentials_file $credentials_file
 ```
 
 ### Upload a folder
@@ -38,9 +39,9 @@ mother_folder_id="mother_folder_id"
 # if you want to upload inside a existing folder, you need to give mother folder id
 credentials_file="path/to/credentials.json"
 ipython -- src/upload_folder.py \
-	--folder $folder \
-	--mother_folder_id $mother_folder_id \
-	--credentials_file $credentials_file
+    --folder $folder \
+    --mother_folder_id $mother_folder_id \
+    --credentials_file $credentials_file
 ```
 
 ### Download a file
@@ -50,9 +51,9 @@ file_id="file_id"
 dst_path="path/to/save"
 credentials_file="path/to/credentials.json"
 ipython -- src/download.py \
-	--file_id $file_id \
-	--dst_path $dst_path \
-	--credentials_file $credentials_file
+    --file_id $file_id \
+    --dst_path $dst_path \
+    --credentials_file $credentials_file
 ```
 
 ### Download a folder
@@ -63,8 +64,8 @@ dst_folder="path/to/save"
 credentials_file="path/to/credentials.json"
 scan_size=1000
 ipython -- src/download_folder.py \
-	--folder_id $folder_id \
-	--dst_folder $dst_folder \
-	--credentials_file $credentials_file \
-	--scan_size $scan_size
+    --folder_id $folder_id \
+    --dst_folder $dst_folder \
+    --credentials_file $credentials_file \
+    --scan_size $scan_size
 ```
